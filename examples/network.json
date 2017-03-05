@@ -12,7 +12,33 @@
           "addressPrefixes": [
             "192.168.0.0/24"
           ]
-        }
+        },
+        "subnets": [
+          {
+            "name": "sn0",
+            "properties": {
+              "addressPrefix": "192.168.0.0/26"
+            }
+          },
+          {
+            "name": "sn1",
+            "properties": {
+              "addressPrefix": "192.168.0.64/26"
+            }
+          },
+          {
+            "name": "sn2",
+            "properties": {
+              "addressPrefix": "192.168.0.128/26"
+            }
+          },
+          {
+            "name": "sn3",
+            "properties": {
+              "addressPrefix": "192.168.0.192/26"
+            }
+          }
+        ]
       }
     }
   ]
