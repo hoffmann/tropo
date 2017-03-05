@@ -97,3 +97,145 @@ class NetworkInterface(Resource):
         self.dnsSettings = dnsSettings
         
 
+class HardwareProfile(Resource):
+    """
+
+    Args:
+        vmSize (string):   
+    """
+    _attribute_map = {
+        'vmSize': {'key': 'vmSize', 'type': 'string', 'required': True}   
+    }
+
+    def __init__(self, vmSize=None):
+        self.vmSize = vmSize
+
+class OsProfile(Resource):
+    """
+
+    Args:
+        computerName (string):  
+        adminUsername (string):  
+        adminPassword (string):  
+        customData (string):  
+        windowsConfiguration (windowsConfiguration):  
+        linuxConfiguration (linuxConfiguration):  
+        secrets ([secret]):   
+    """
+    _attribute_map = {
+        'computerName': {'key': 'computerName', 'type': 'string', 'required': True}, 
+        'adminUsername': {'key': 'adminUsername', 'type': 'string', 'required': True}, 
+        'adminPassword': {'key': 'adminPassword', 'type': 'string', 'required': True}, 
+        'customData': {'key': 'customData', 'type': 'string'}, 
+        'windowsConfiguration': {'key': 'windowsConfiguration', 'type': 'windowsConfiguration'}, 
+        'linuxConfiguration': {'key': 'linuxConfiguration', 'type': 'linuxConfiguration'}, 
+        'secrets': {'key': 'secrets', 'type': '[secret]'}   
+    }
+
+    def __init__(self, computerName=None, adminUsername=None, adminPassword=None, customData=None, windowsConfiguration=None, linuxConfiguration=None, secrets=None):
+        self.computerName = computerName
+        self.adminUsername = adminUsername
+        self.adminPassword = adminPassword
+        self.customData = customData
+        self.windowsConfiguration = windowsConfiguration
+        self.linuxConfiguration = linuxConfiguration
+        self.secrets = secrets
+
+class StorageProfile(Resource):
+    """
+
+    Args:
+        imageReference (imageReference|str):  
+        osDisk (osDisk):  
+        dataDisks ([dataDisk]):   
+    """
+    _attribute_map = {
+        'imageReference': {'key': 'imageReference', 'type': 'imageReference|str'}, 
+        'osDisk': {'key': 'osDisk', 'type': 'osDisk', 'required': True}, 
+        'dataDisks': {'key': 'dataDisks', 'type': '[dataDisk]'}   
+    }
+
+    def __init__(self, imageReference=None, osDisk=None, dataDisks=None):
+        self.imageReference = imageReference
+        self.osDisk = osDisk
+        self.dataDisks = dataDisks
+
+class OsDisk(Resource):
+    """
+
+    Args:
+        name (string):  
+        vhd (vhd):  
+        image (vhd):  
+        caching (string):  
+        createOption (string|str):   
+    """
+    _attribute_map = {
+        'name': {'key': 'name', 'type': 'string', 'required': True}, 
+        'vhd': {'key': 'vhd', 'type': 'vhd', 'required': True}, 
+        'image': {'key': 'image', 'type': 'vhd'}, 
+        'caching': {'key': 'caching', 'type': 'string'}, 
+        'createOption': {'key': 'createOption', 'type': 'string|str', 'required': True}   
+    }
+
+    def __init__(self, name=None, vhd=None, image=None, caching=None, createOption=None):
+        self.name = name
+        self.vhd = vhd
+        self.image = image
+        self.caching = caching
+        self.createOption = createOption
+
+class DataDisk(Resource):
+    """
+
+    Args:
+        name (string):  
+        diskSizeGB (string):  
+        lun (number):  
+        vhd (vhdUri):  
+        caching (string):  
+        createOption (string|str):   
+    """
+    _attribute_map = {
+        'name': {'key': 'name', 'type': 'string', 'required': True}, 
+        'diskSizeGB': {'key': 'diskSizeGB', 'type': 'string'}, 
+        'lun': {'key': 'lun', 'type': 'number', 'required': True}, 
+        'vhd': {'key': 'vhd', 'type': 'vhdUri', 'required': True}, 
+        'caching': {'key': 'caching', 'type': 'string'}, 
+        'createOption': {'key': 'createOption', 'type': 'string|str', 'required': True}   
+    }
+
+    def __init__(self, name=None, diskSizeGB=None, lun=None, vhd=None, caching=None, createOption=None):
+        self.name = name
+        self.diskSizeGB = diskSizeGB
+        self.lun = lun
+        self.vhd = vhd
+        self.caching = caching
+        self.createOption = createOption
+
+class NetworkProfile(Resource):
+    """
+
+    Args:
+        networkInterfaces ([networkInterfaces]):   
+    """
+    _attribute_map = {
+        'networkInterfaces': {'key': 'networkInterfaces', 'type': '[networkInterfaces]', 'required': True}   
+    }
+
+    def __init__(self, networkInterfaces=None):
+        self.networkInterfaces = networkInterfaces
+
+class Vhd(Resource):
+    """
+
+    Args:
+        uri (string):   
+    """
+    _attribute_map = {
+        'uri': {'key': 'uri', 'type': 'string', 'required': True}   
+    }
+
+    def __init__(self, uri=None):
+        self.uri = uri
+
