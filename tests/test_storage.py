@@ -1,20 +1,6 @@
 from tropo.storage import StorageAccount, Sku
 
 def test_storage():
-    sa = StorageAccount(name="storage-1", location="westeurope", sku={"name": "Standard_RAGRS"})
-    expacted = {
-            "type": "Microsoft.Storage/storageAccounts",
-            "apiVersion": "2016-01-01",
-            "location": "westeurope",
-            "name": "storage-1",
-            "sku": {"name": "Standard_RAGRS"}
-        }
-    assert sa._asdict()  == expected
-
-
-from tropo.storage import *
-
-def test_storage():
     sku = Sku(name="Standard_LRS")
     assert sku._asdict() == {"name": "Standard_LRS"}
 
@@ -41,4 +27,15 @@ def test_storage():
                             'location': "[resourceGroup().location]",
                             'sku': {'name': 'Standard_LRS'},
                             'tags': {'env': 'Production'}}
+
+
+    sa = StorageAccount(name="storage-1", location="westeurope", sku={"name": "Standard_RAGRS"})
+    expected = {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2016-01-01",
+            "location": "westeurope",
+            "name": "storage-1",
+            "sku": {"name": "Standard_RAGRS"}
+        }
+    assert sa._asdict()  == expected
 

@@ -54,7 +54,7 @@ class PublicIPAddress(Resource):
         description (str): a description of the resource
         tags: ({str}): a dictionary of tags
         dependsOn: ([]): a list of resources
-        publicIPAllocationMethod (str|str):  Microsoft.Network/publicIPAddresses: Public IP allocation method
+        publicIPAllocationMethod (string|str):  Microsoft.Network/publicIPAddresses: Public IP allocation method
         idleTimeoutInMinutes (_):  Microsoft.Network/publicIPAddresses: Idle timeout in minutes
         dnsSettings (publicIPAddressDnsSettings|str):  Microsoft.Network/publicIPAddresses: DNS settings  
 
