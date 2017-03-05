@@ -49,8 +49,7 @@ class Sku(Resource):
         name (string|str):  Gets or sets the sku name. Required for account creation, optional for update.
             Note that in older versions, sku name was called accountType.
             Possible values include: 'Standard_LRS', 'Standard_GRS',
-            'Standard_RAGRS', 'Standard_ZRS', 'Premium_LRS'
- 
+            'Standard_RAGRS', 'Standard_ZRS', 'Premium_LRS' 
     """
     _attribute_map = {
         'name': {'key': 'name', 'type': 'string|str', 'required': True}   
@@ -58,4 +57,3 @@ class Sku(Resource):
 
     def __init__(self, name=None):
         self.name = name
-
