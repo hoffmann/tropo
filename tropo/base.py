@@ -1,9 +1,11 @@
+import json
+
 class AzureObject(object):
     _attribute_map = {}
     def _asdict(self):
         record = {}
         for k, d in self._attribute_map.items():
-            if hasattr(self, k) and getattr(self, k):
+            if hasattr(self, k) and (getattr(self, k) or d.get("required", False)):
                 obj = getattr(self, k)
                 if isinstance(obj, AzureObject):
                     value = obj._asdict()
@@ -34,7 +36,7 @@ class Template(AzureObject):
                       "contentVersion": {"key": "contentVersion", "type": "str"},
                       "parameters": {"key": "parameters", "type": "[]"},
                       "variables": {"key": "variables", "type": "[]"},
-                      "resources": {"key": "resources", "type": "[]"}
+                      "resources": {"key": "resources", "type": "[]", "required": True}
                       }
 
     def __init__(self, parameters=None, variables=None, resources=None, outputs=None):
@@ -53,6 +55,8 @@ class Template(AzureObject):
             outputs = {}
         self.outputs = outputs
 
+    def __str__(self):
+        return json.dumps(self._asdict(), indent=2)
 
 
 class Resource(AzureObject):
