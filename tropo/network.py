@@ -126,7 +126,6 @@ class NetworkSecurityGroup(Resource):
         self.securityRules = securityRules
         
 
-
 class SecurityRule(Resource):
     """
 
@@ -179,3 +178,4 @@ class AddressSpace(Resource):
 
     def __init__(self, addressPrefixes=None):
         self.addressPrefixes = addressPrefixes
+

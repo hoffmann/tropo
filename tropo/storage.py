@@ -41,7 +41,6 @@ class StorageAccount(Resource):
         self.kind = kind
         
 
-
 class Sku(Resource):
     """The SKU of the storage account.
 
@@ -57,3 +56,4 @@ class Sku(Resource):
 
     def __init__(self, name=None):
         self.name = name
+
