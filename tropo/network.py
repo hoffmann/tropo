@@ -88,3 +88,18 @@ class PublicIPAddress(Resource):
         self.dnsSettings = dnsSettings
         
 
+
+class addressSpace(Resource):
+    """
+
+    Args:
+        addressPrefixes ([string]):  
+ 
+    """
+    _attribute_map = {
+        'addressPrefixes': {'key': 'addressPrefixes', 'type': '[string]', 'required': True}   
+    }
+
+    def __init__(self, addressPrefixes=None):
+        self.addressPrefixes = addressPrefixes
+
