@@ -4,3 +4,5 @@ py==1.4.32
 pyparsing==2.1.10
 pytest==3.0.6
 six==1.10.0
+coverage==4.2
+pytest-cov==2.3.1
