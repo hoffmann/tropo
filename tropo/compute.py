@@ -147,6 +147,7 @@ class StorageProfile(Resource):
     Args:
         imageReference (imageReference|str):  
         osDisk (osDisk):  
+        osType (osDisk):  
         dataDisks ([dataDisk]):   
     """
     _attribute_map = {
@@ -160,27 +161,52 @@ class StorageProfile(Resource):
         self.osDisk = osDisk
         self.dataDisks = dataDisks
 
+class ImageReference(Resource):
+    """
+
+    Args:
+        publisher (string):  
+        offer (string):  
+        sku (string):  
+        version (string):   
+    """
+    _attribute_map = {
+        'publisher': {'key': 'publisher', 'type': 'string', 'required': True}, 
+        'offer': {'key': 'offer', 'type': 'string', 'required': True}, 
+        'sku': {'key': 'sku', 'type': 'string', 'required': True}, 
+        'version': {'key': 'version', 'type': 'string', 'required': True}   
+    }
+
+    def __init__(self, publisher=None, offer=None, sku=None, version=None):
+        self.publisher = publisher
+        self.offer = offer
+        self.sku = sku
+        self.version = version
+
 class OsDisk(Resource):
     """
 
     Args:
         name (string):  
         vhd (vhd):  
-        image (vhd):  
+        image (vhd):
+        osType (string):
         caching (string):  
         createOption (string|str):   
     """
     _attribute_map = {
         'name': {'key': 'name', 'type': 'string', 'required': True}, 
         'vhd': {'key': 'vhd', 'type': 'vhd', 'required': True}, 
+        'osType': {'key': 'osType', 'type': 'str', 'required': True}, 
         'image': {'key': 'image', 'type': 'vhd'}, 
         'caching': {'key': 'caching', 'type': 'string'}, 
         'createOption': {'key': 'createOption', 'type': 'string|str', 'required': True}   
     }
 
-    def __init__(self, name=None, vhd=None, image=None, caching=None, createOption=None):
+    def __init__(self, name=None, vhd=None, osType=None, image=None, caching=None, createOption=None):
         self.name = name
         self.vhd = vhd
+        self.osType = osType 
         self.image = image
         self.caching = caching
         self.createOption = createOption
