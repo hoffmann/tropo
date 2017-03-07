@@ -1,6 +1,5 @@
 from tropo.base import Resource
 
-
 class VirtualMachine(Resource):
     """Microsoft.Compute/virtualMachines
 
@@ -123,12 +122,12 @@ class OsProfile(Resource):
         secrets ([secret]):   
     """
     _attribute_map = {
-        'computerName': {'key': 'computerName', 'type': 'string', 'required': True}, 
-        'adminUsername': {'key': 'adminUsername', 'type': 'string', 'required': True}, 
-        'adminPassword': {'key': 'adminPassword', 'type': 'string', 'required': True}, 
-        'customData': {'key': 'customData', 'type': 'string'}, 
-        'windowsConfiguration': {'key': 'windowsConfiguration', 'type': 'windowsConfiguration'}, 
-        'linuxConfiguration': {'key': 'linuxConfiguration', 'type': 'linuxConfiguration'}, 
+        'computerName': {'key': 'computerName', 'type': 'string', 'required': True},
+        'adminUsername': {'key': 'adminUsername', 'type': 'string', 'required': True},
+        'adminPassword': {'key': 'adminPassword', 'type': 'string', 'required': True},
+        'customData': {'key': 'customData', 'type': 'string'},
+        'windowsConfiguration': {'key': 'windowsConfiguration', 'type': 'windowsConfiguration'},
+        'linuxConfiguration': {'key': 'linuxConfiguration', 'type': 'linuxConfiguration'},
         'secrets': {'key': 'secrets', 'type': '[secret]'}   
     }
 
@@ -149,13 +148,42 @@ class LinuxConfiguration(Resource):
         ssh (ssh):   
     """
     _attribute_map = {
-        'disablePasswordAuthentication': {'key': 'disablePasswordAuthentication', 'type': 'str|boolean'}, 
+        'disablePasswordAuthentication': {'key': 'disablePasswordAuthentication', 'type': 'str|boolean'},
         'ssh': {'key': 'ssh', 'type': 'ssh'}   
     }
 
     def __init__(self, disablePasswordAuthentication=None, ssh=None):
         self.disablePasswordAuthentication = disablePasswordAuthentication
         self.ssh = ssh
+
+class Ssh(Resource):
+    """
+
+    Args:
+        publicKeys ([publicKey]):   
+    """
+    _attribute_map = {
+        'publicKeys': {'key': 'publicKeys', 'type': '[publicKey]'}   
+    }
+
+    def __init__(self, publicKeys=None):
+        self.publicKeys = publicKeys
+
+class PublicKey(Resource):
+    """
+
+    Args:
+        path (string):  
+        keyData (string):   
+    """
+    _attribute_map = {
+        'path': {'key': 'path', 'type': 'string'},
+        'keyData': {'key': 'keyData', 'type': 'string'}   
+    }
+
+    def __init__(self, path=None, keyData=None):
+        self.path = path
+        self.keyData = keyData
 
 class StorageProfile(Resource):
     """
@@ -166,8 +194,8 @@ class StorageProfile(Resource):
         dataDisks ([dataDisk]):   
     """
     _attribute_map = {
-        'imageReference': {'key': 'imageReference', 'type': 'imageReference|str'}, 
-        'osDisk': {'key': 'osDisk', 'type': 'osDisk', 'required': True}, 
+        'imageReference': {'key': 'imageReference', 'type': 'imageReference|str'},
+        'osDisk': {'key': 'osDisk', 'type': 'osDisk', 'required': True},
         'dataDisks': {'key': 'dataDisks', 'type': '[dataDisk]'}   
     }
 
@@ -186,9 +214,9 @@ class ImageReference(Resource):
         version (string):   
     """
     _attribute_map = {
-        'publisher': {'key': 'publisher', 'type': 'string', 'required': True}, 
-        'offer': {'key': 'offer', 'type': 'string', 'required': True}, 
-        'sku': {'key': 'sku', 'type': 'string', 'required': True}, 
+        'publisher': {'key': 'publisher', 'type': 'string', 'required': True},
+        'offer': {'key': 'offer', 'type': 'string', 'required': True},
+        'sku': {'key': 'sku', 'type': 'string', 'required': True},
         'version': {'key': 'version', 'type': 'string', 'required': True}   
     }
 
@@ -210,11 +238,11 @@ class OsDisk(Resource):
         createOption (string|str):   
     """
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'string', 'required': True}, 
-        'vhd': {'key': 'vhd', 'type': 'vhd', 'required': True}, 
-        'osType': {'key': 'osType', 'type': 'string'}, 
-        'image': {'key': 'image', 'type': 'vhd'}, 
-        'caching': {'key': 'caching', 'type': 'string'}, 
+        'name': {'key': 'name', 'type': 'string', 'required': True},
+        'vhd': {'key': 'vhd', 'type': 'vhd', 'required': True},
+        'osType': {'key': 'osType', 'type': 'string'},
+        'image': {'key': 'image', 'type': 'vhd'},
+        'caching': {'key': 'caching', 'type': 'string'},
         'createOption': {'key': 'createOption', 'type': 'string|str', 'required': True}   
     }
 
@@ -238,11 +266,11 @@ class DataDisk(Resource):
         createOption (string|str):   
     """
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'string', 'required': True}, 
-        'diskSizeGB': {'key': 'diskSizeGB', 'type': 'string'}, 
-        'lun': {'key': 'lun', 'type': 'number', 'required': True}, 
-        'vhd': {'key': 'vhd', 'type': 'vhdUri', 'required': True}, 
-        'caching': {'key': 'caching', 'type': 'string'}, 
+        'name': {'key': 'name', 'type': 'string', 'required': True},
+        'diskSizeGB': {'key': 'diskSizeGB', 'type': 'string'},
+        'lun': {'key': 'lun', 'type': 'number', 'required': True},
+        'vhd': {'key': 'vhd', 'type': 'vhdUri', 'required': True},
+        'caching': {'key': 'caching', 'type': 'string'},
         'createOption': {'key': 'createOption', 'type': 'string|str', 'required': True}   
     }
 

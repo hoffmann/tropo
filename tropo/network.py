@@ -136,9 +136,9 @@ class Subnet(Resource):
         routeTable (id):   
     """
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'string', 'required': True}, 
-        'addressPrefix': {'key': 'properties.addressPrefix', 'type': 'string', 'required': True}, 
-        'networkSecurityGroup': {'key': 'properties.networkSecurityGroup', 'type': 'id'}, 
+        'name': {'key': 'name', 'type': 'string', 'required': True},
+        'addressPrefix': {'key': 'properties.addressPrefix', 'type': 'string', 'required': True},
+        'networkSecurityGroup': {'key': 'properties.networkSecurityGroup', 'type': 'id'},
         'routeTable': {'key': 'properties.routeTable', 'type': 'id'}   
     }
 
@@ -174,12 +174,12 @@ class IpConfiguration(Resource):
         loadBalancerInboundNatRules ([id]):   
     """
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'string', 'required': True}, 
-        'subnet': {'key': 'properties.subnet', 'type': 'id', 'required': True}, 
-        'privateIPAddress': {'key': 'properties.privateIPAddress', 'type': 'string'}, 
-        'privateIPAllocationMethod': {'key': 'properties.privateIPAllocationMethod', 'type': 'string|str', 'required': True}, 
-        'publicIPAddress': {'key': 'properties.publicIPAddress', 'type': 'id'}, 
-        'loadBalancerBackendAddressPools': {'key': 'properties.loadBalancerBackendAddressPools', 'type': '[id]'}, 
+        'name': {'key': 'name', 'type': 'string', 'required': True},
+        'subnet': {'key': 'properties.subnet', 'type': 'id', 'required': True},
+        'privateIPAddress': {'key': 'properties.privateIPAddress', 'type': 'string'},
+        'privateIPAllocationMethod': {'key': 'properties.privateIPAllocationMethod', 'type': 'string|str', 'required': True},
+        'publicIPAddress': {'key': 'properties.publicIPAddress', 'type': 'id'},
+        'loadBalancerBackendAddressPools': {'key': 'properties.loadBalancerBackendAddressPools', 'type': '[id]'},
         'loadBalancerInboundNatRules': {'key': 'properties.loadBalancerInboundNatRules', 'type': '[id]'}   
     }
 
@@ -200,7 +200,7 @@ class NetworkInterfaceDnsSetting(Resource):
         internalDnsNameLabel (string):   
     """
     _attribute_map = {
-        'dnsServers': {'key': 'dnsServers', 'type': 'str|[string]'}, 
+        'dnsServers': {'key': 'dnsServers', 'type': 'str|[string]'},
         'internalDnsNameLabel': {'key': 'internalDnsNameLabel', 'type': 'string'}   
     }
 
@@ -224,15 +224,15 @@ class SecurityRule(Resource):
         direction (string|str):   
     """
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'string', 'required': True}, 
-        'description': {'key': 'properties.description', 'type': 'string'}, 
-        'protocol': {'key': 'properties.protocol', 'type': 'string|str', 'required': True}, 
-        'sourcePortRange': {'key': 'properties.sourcePortRange', 'type': 'string', 'required': True}, 
-        'destinationPortRange': {'key': 'properties.destinationPortRange', 'type': 'string', 'required': True}, 
-        'sourceAddressPrefix': {'key': 'properties.sourceAddressPrefix', 'type': 'string', 'required': True}, 
-        'destinationAddressPrefix': {'key': 'properties.destinationAddressPrefix', 'type': 'string', 'required': True}, 
-        'access': {'key': 'properties.access', 'type': 'string|str', 'required': True}, 
-        'priority': {'key': 'properties.priority', 'type': 'number|expr', 'required': True}, 
+        'name': {'key': 'name', 'type': 'string', 'required': True},
+        'description': {'key': 'properties.description', 'type': 'string'},
+        'protocol': {'key': 'properties.protocol', 'type': 'string|str', 'required': True},
+        'sourcePortRange': {'key': 'properties.sourcePortRange', 'type': 'string', 'required': True},
+        'destinationPortRange': {'key': 'properties.destinationPortRange', 'type': 'string', 'required': True},
+        'sourceAddressPrefix': {'key': 'properties.sourceAddressPrefix', 'type': 'string', 'required': True},
+        'destinationAddressPrefix': {'key': 'properties.destinationAddressPrefix', 'type': 'string', 'required': True},
+        'access': {'key': 'properties.access', 'type': 'string|str', 'required': True},
+        'priority': {'key': 'properties.priority', 'type': 'number|expr', 'required': True},
         'direction': {'key': 'properties.direction', 'type': 'string|str', 'required': True}   
     }
 
