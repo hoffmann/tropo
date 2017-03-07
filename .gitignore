@@ -90,3 +90,4 @@ ENV/
 .ropeproject
 
 examples/Makefile
+.idea/
