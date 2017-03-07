@@ -18,14 +18,14 @@ class StorageAccount(Resource):
     _type = 'Microsoft.Storage/storageAccounts'
     _apiVersion = '2016-01-01'
     _attribute_map = {
-        '_apiVersion': {'key': 'apiVersion', 'type': 'str'}, 
-        '_type': {'key': 'type', 'type': 'str'}, 
-        'name': {'key': 'name', 'type': 'str'}, 
-        'location': {'key': 'location', 'type': 'str'}, 
-        'tags': {'key': 'tags', 'type': 'str'}, 
-        'description': {'key': 'description', 'type': 'str'}, 
-        'dependsOn': {'key': 'dependsOn', 'type': '[]'}, 
-        'sku': {'key': 'sku', 'type': '_'}, 
+        '_apiVersion': {'key': 'apiVersion', 'type': 'str'},
+        '_type': {'key': 'type', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'dependsOn': {'key': 'dependsOn', 'type': '[]'},
+        'sku': {'key': 'sku', 'type': '_'},
         'kind': {'key': 'kind', 'type': '_'}   
     }
 

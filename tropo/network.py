@@ -19,15 +19,15 @@ class VirtualNetwork(Resource):
     _type = 'Microsoft.Network/virtualNetworks'
     _apiVersion = '2016-03-30'
     _attribute_map = {
-        '_apiVersion': {'key': 'apiVersion', 'type': 'str'}, 
-        '_type': {'key': 'type', 'type': 'str'}, 
-        'name': {'key': 'name', 'type': 'str'}, 
-        'location': {'key': 'location', 'type': 'str'}, 
-        'tags': {'key': 'tags', 'type': 'str'}, 
-        'description': {'key': 'description', 'type': 'str'}, 
-        'dependsOn': {'key': 'dependsOn', 'type': '[]'}, 
-        'addressSpace': {'key': 'properties.addressSpace', 'type': '_'}, 
-        'dhcpOptions': {'key': 'properties.dhcpOptions', 'type': '_'}, 
+        '_apiVersion': {'key': 'apiVersion', 'type': 'str'},
+        '_type': {'key': 'type', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'dependsOn': {'key': 'dependsOn', 'type': '[]'},
+        'addressSpace': {'key': 'properties.addressSpace', 'type': '_'},
+        'dhcpOptions': {'key': 'properties.dhcpOptions', 'type': '_'},
         'subnets': {'key': 'properties.subnets', 'type': '_'}   
     }
 
@@ -63,15 +63,15 @@ class PublicIPAddress(Resource):
     _type = 'Microsoft.Network/publicIPAddresses'
     _apiVersion = '2016-03-30'
     _attribute_map = {
-        '_apiVersion': {'key': 'apiVersion', 'type': 'str'}, 
-        '_type': {'key': 'type', 'type': 'str'}, 
-        'name': {'key': 'name', 'type': 'str'}, 
-        'location': {'key': 'location', 'type': 'str'}, 
-        'tags': {'key': 'tags', 'type': 'str'}, 
-        'description': {'key': 'description', 'type': 'str'}, 
-        'dependsOn': {'key': 'dependsOn', 'type': '[]'}, 
-        'publicIPAllocationMethod': {'key': 'properties.publicIPAllocationMethod', 'type': '_'}, 
-        'idleTimeoutInMinutes': {'key': 'properties.idleTimeoutInMinutes', 'type': '_'}, 
+        '_apiVersion': {'key': 'apiVersion', 'type': 'str'},
+        '_type': {'key': 'type', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'dependsOn': {'key': 'dependsOn', 'type': '[]'},
+        'publicIPAllocationMethod': {'key': 'properties.publicIPAllocationMethod', 'type': '_'},
+        'idleTimeoutInMinutes': {'key': 'properties.idleTimeoutInMinutes', 'type': '_'},
         'dnsSettings': {'key': 'properties.dnsSettings', 'type': '_'}   
     }
 
@@ -105,13 +105,13 @@ class NetworkSecurityGroup(Resource):
     _type = 'Microsoft.Network/networkSecurityGroups'
     _apiVersion = '2016-03-30'
     _attribute_map = {
-        '_apiVersion': {'key': 'apiVersion', 'type': 'str'}, 
-        '_type': {'key': 'type', 'type': 'str'}, 
-        'name': {'key': 'name', 'type': 'str'}, 
-        'location': {'key': 'location', 'type': 'str'}, 
-        'tags': {'key': 'tags', 'type': 'str'}, 
-        'description': {'key': 'description', 'type': 'str'}, 
-        'dependsOn': {'key': 'dependsOn', 'type': '[]'}, 
+        '_apiVersion': {'key': 'apiVersion', 'type': 'str'},
+        '_type': {'key': 'type', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'dependsOn': {'key': 'dependsOn', 'type': '[]'},
         'securityRules': {'key': 'properties.securityRules', 'type': '_'}   
     }
 

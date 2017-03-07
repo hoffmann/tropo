@@ -21,17 +21,17 @@ class VirtualMachine(Resource):
     _type = 'Microsoft.Compute/virtualMachines'
     _apiVersion = '2015-06-15'
     _attribute_map = {
-        '_apiVersion': {'key': 'apiVersion', 'type': 'str'}, 
-        '_type': {'key': 'type', 'type': 'str'}, 
-        'name': {'key': 'name', 'type': 'str'}, 
-        'location': {'key': 'location', 'type': 'str'}, 
-        'tags': {'key': 'tags', 'type': 'str'}, 
-        'description': {'key': 'description', 'type': 'str'}, 
-        'dependsOn': {'key': 'dependsOn', 'type': '[]'}, 
-        'availabilitySet': {'key': 'properties.availabilitySet', 'type': '_'}, 
-        'hardwareProfile': {'key': 'properties.hardwareProfile', 'type': '_'}, 
-        'storageProfile': {'key': 'properties.storageProfile', 'type': '_'}, 
-        'osProfile': {'key': 'properties.osProfile', 'type': '_'}, 
+        '_apiVersion': {'key': 'apiVersion', 'type': 'str'},
+        '_type': {'key': 'type', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'dependsOn': {'key': 'dependsOn', 'type': '[]'},
+        'availabilitySet': {'key': 'properties.availabilitySet', 'type': '_'},
+        'hardwareProfile': {'key': 'properties.hardwareProfile', 'type': '_'},
+        'storageProfile': {'key': 'properties.storageProfile', 'type': '_'},
+        'osProfile': {'key': 'properties.osProfile', 'type': '_'},
         'networkProfile': {'key': 'properties.networkProfile', 'type': '_'}   
     }
 
@@ -70,16 +70,16 @@ class NetworkInterface(Resource):
     _type = 'Microsoft.Network/networkInterfaces'
     _apiVersion = '2016-03-30'
     _attribute_map = {
-        '_apiVersion': {'key': 'apiVersion', 'type': 'str'}, 
-        '_type': {'key': 'type', 'type': 'str'}, 
-        'name': {'key': 'name', 'type': 'str'}, 
-        'location': {'key': 'location', 'type': 'str'}, 
-        'tags': {'key': 'tags', 'type': 'str'}, 
-        'description': {'key': 'description', 'type': 'str'}, 
-        'dependsOn': {'key': 'dependsOn', 'type': '[]'}, 
-        'enableIPForwarding': {'key': 'properties.enableIPForwarding', 'type': '_'}, 
-        'networkSecurityGroup': {'key': 'properties.networkSecurityGroup', 'type': '_'}, 
-        'ipConfigurations': {'key': 'properties.ipConfigurations', 'type': '_'}, 
+        '_apiVersion': {'key': 'apiVersion', 'type': 'str'},
+        '_type': {'key': 'type', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'dependsOn': {'key': 'dependsOn', 'type': '[]'},
+        'enableIPForwarding': {'key': 'properties.enableIPForwarding', 'type': '_'},
+        'networkSecurityGroup': {'key': 'properties.networkSecurityGroup', 'type': '_'},
+        'ipConfigurations': {'key': 'properties.ipConfigurations', 'type': '_'},
         'dnsSettings': {'key': 'properties.dnsSettings', 'type': '_'}   
     }
 
@@ -141,13 +141,28 @@ class OsProfile(Resource):
         self.linuxConfiguration = linuxConfiguration
         self.secrets = secrets
 
+class LinuxConfiguration(Resource):
+    """
+
+    Args:
+        disablePasswordAuthentication (str|boolean):  
+        ssh (ssh):   
+    """
+    _attribute_map = {
+        'disablePasswordAuthentication': {'key': 'disablePasswordAuthentication', 'type': 'str|boolean'}, 
+        'ssh': {'key': 'ssh', 'type': 'ssh'}   
+    }
+
+    def __init__(self, disablePasswordAuthentication=None, ssh=None):
+        self.disablePasswordAuthentication = disablePasswordAuthentication
+        self.ssh = ssh
+
 class StorageProfile(Resource):
     """
 
     Args:
         imageReference (imageReference|str):  
         osDisk (osDisk):  
-        osType (osDisk):  
         dataDisks ([dataDisk]):   
     """
     _attribute_map = {
@@ -189,15 +204,15 @@ class OsDisk(Resource):
     Args:
         name (string):  
         vhd (vhd):  
-        image (vhd):
-        osType (string):
+        osType (string):  
+        image (vhd):  
         caching (string):  
         createOption (string|str):   
     """
     _attribute_map = {
         'name': {'key': 'name', 'type': 'string', 'required': True}, 
         'vhd': {'key': 'vhd', 'type': 'vhd', 'required': True}, 
-        'osType': {'key': 'osType', 'type': 'str', 'required': True}, 
+        'osType': {'key': 'osType', 'type': 'string'}, 
         'image': {'key': 'image', 'type': 'vhd'}, 
         'caching': {'key': 'caching', 'type': 'string'}, 
         'createOption': {'key': 'createOption', 'type': 'string|str', 'required': True}   
@@ -206,7 +221,7 @@ class OsDisk(Resource):
     def __init__(self, name=None, vhd=None, osType=None, image=None, caching=None, createOption=None):
         self.name = name
         self.vhd = vhd
-        self.osType = osType 
+        self.osType = osType
         self.image = image
         self.caching = caching
         self.createOption = createOption
