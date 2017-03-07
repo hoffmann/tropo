@@ -1,3 +1,4 @@
+import json
 from tropo.base import Template, Resource
 
 def test_template():
@@ -7,6 +8,9 @@ def test_template():
                 'contentVersion': '1.0.0.0',
                 'resources': []}
     assert d == expected
+
+    s = str(t)
+    assert s == json.dumps(t._asdict(), indent=2)
 
 def test_resource():
     t = Resource()
