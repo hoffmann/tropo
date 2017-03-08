@@ -30,33 +30,6 @@ def dumps(obj):
 
 class AzureObject(object):
     _attribute_map = {}
-    def _asdict(self):
-        record = {}
-        for k, d in self._attribute_map.items():
-            if hasattr(self, k) and (getattr(self, k) or d.get("required", False)):
-                obj = getattr(self, k)
-                if isinstance(obj, AzureObject):
-                    value = obj._asdict()
-                elif isinstance(obj, list):
-                    value = []
-                    for o in obj:
-                        if isinstance(o, AzureObject):
-                            value.append(o._asdict())
-                        else:
-                            value.append(o)
-                else:
-                    value = obj
-                
-                key = d["key"]
-                parts = key.split(".")
-                if len(parts) == 2:
-                    sub, key = parts
-                    if not sub in record:
-                        record[sub] = {}
-                    record[sub][key] = value
-                else:
-                    record[key] = value
-        return record
 
 
 class Template(AzureObject):

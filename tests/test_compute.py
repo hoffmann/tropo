@@ -1,11 +1,5 @@
 from tropo.compute import *
-import json
-
-
-def dump(r):
-    print(json.dumps(r._asdict(), indent=2))
-
-# dump(od)
+from tropo.base import dump
 
 
 def test_osdisk():
@@ -29,7 +23,7 @@ def test_osdisk():
         "caching": "None",
         "createOption": "FromImage"
     }
-    assert od._asdict() == expected
+    assert dump(od) == expected
 
 
 def test_datadisk():
@@ -51,7 +45,7 @@ def test_datadisk():
         "caching": "None",
         "createOption": "Empty"
     }
-    assert dd._asdict() == expected
+    assert dump(dd) == expected
 
 
 def test_network_profile():
@@ -64,7 +58,7 @@ def test_network_profile():
             }
         ]
     }
-    assert network_profile._asdict() == expected
+    assert dump(network_profile) == expected
 
 
 def test_vhd():
@@ -73,4 +67,4 @@ def test_vhd():
     expected = {
         "uri": "https://storage.blob.core.windows.net/vhds/osdisk.vhd"
     }
-    assert vhd._asdict() == expected
+    assert dump(vhd) == expected

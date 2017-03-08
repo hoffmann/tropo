@@ -1,5 +1,5 @@
 from tropo.network import VirtualNetwork, NetworkSecurityGroup, AddressSpace, SecurityRule, PublicIPAddress, Subnet, Id, IpConfiguration, NetworkInterfaceDnsSetting
-
+from tropo.base import dump
 
 def test_vnet():
     vnet = VirtualNetwork(name="vnet1",
@@ -13,7 +13,7 @@ def test_vnet():
         'properties': {
             'addressSpace': {
                 'addressPrefixes': ['192.168.0.0/24']}}}
-    assert vnet._asdict() == expected
+    assert dump(vnet) == expected
 
 
 def test_public_ip_address():
@@ -31,7 +31,7 @@ def test_public_ip_address():
             "idleTimeoutInMinutes": 4
         }
     }
-    assert ip._asdict() == expected
+    assert dump(ip) == expected
 
 
 def test_network_security_group():
@@ -42,7 +42,7 @@ def test_network_security_group():
                 'name': 'nsg1',
                 'location': '[resourceGroup().location]'}
 
-    assert nsg._asdict() == expected
+    assert dump(nsg) == expected
 
     rule = SecurityRule(name="rule1",
                         protocol="*",
@@ -77,7 +77,7 @@ def test_network_security_group():
                     ]
                 }
                 }
-    assert nsg._asdict() == expected
+    assert dump(nsg) == expected
 
 
 def test_subnet():
@@ -89,7 +89,7 @@ def test_subnet():
             "addressPrefix": "192.168.0.1/24"
         }
     }
-    assert sn._asdict() == expected
+    assert dump(sn) == expected
 
 
 def test_id():
@@ -97,7 +97,7 @@ def test_id():
     expected = {
         "id": "foo"
     }
-    assert i._asdict() == expected
+    assert dump(i) == expected
 
 
 def test_ip_configuration():
@@ -121,7 +121,7 @@ def test_ip_configuration():
             }
         }
     }
-    assert ipc._asdict() == expected
+    assert dump(ipc) == expected
 
 
 def test_network_interface_dns_setting():
@@ -134,7 +134,7 @@ def test_network_interface_dns_setting():
         "internalDnsNameLabel": "host.local"
     }
 
-    assert dns._asdict() == expected
+    assert dump(dns) == expected
 
 
 def test_security_rule():
@@ -161,14 +161,14 @@ def test_security_rule():
                 }
                 }
 
-    assert rule._asdict() == expected
+    assert dump(rule) == expected
 
 
 def test_address_space():
     a = AddressSpace(["192.168.0.0/24"])
     expected = {'addressPrefixes': ['192.168.0.0/24']}
-    assert a._asdict() == expected
+    assert dump(a) == expected
 
     a = AddressSpace(addressPrefixes=["192.168.0.0/24"])
     expected = {'addressPrefixes': ['192.168.0.0/24']}
-    assert a._asdict() == expected
+    assert dump(a) == expected
