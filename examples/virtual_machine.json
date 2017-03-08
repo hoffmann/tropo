@@ -1,0 +1,128 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "apiVersion": "2016-03-30",
+      "type": "Microsoft.Network/virtualNetworks",
+      "name": "vnet1",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "192.168.0.0/24"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "default",
+            "properties": {
+              "addressPrefix": "192.168.0.0/24"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Compute/virtualMachines",
+      "name": "testvm",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', concat(uniqueString(subscription().subscriptionId, resourceGroup().name), 'teststorage'))]",
+        "[resourceId('Microsoft.Network/networkInterfaces', 'testvmic')]",
+        "[resourceId('Microsoft.Network/publicIPAddresses', 'testvmpublic')]"
+      ],
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "Standard_DS3_v2"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "credativ",
+            "offer": "Debian",
+            "sku": "8",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "testvm-osdisk",
+            "vhd": {
+              "uri": "[concat('https://', concat(uniqueString(subscription().subscriptionId, resourceGroup().name), 'teststorage'), '.blob.core.windows.net/vhds/', 'testvm', '-osdisk.vhd')]"
+            },
+            "caching": "None",
+            "createOption": "FromImage"
+          }
+        },
+        "osProfile": {
+          "computerName": "testvm",
+          "adminUsername": "testuser",
+          "adminPassword": null,
+          "linuxConfiguration": {
+            "disablePasswordAuthentication": true,
+            "ssh": {
+              "publicKeys": [
+                {
+                  "path": "/home/testuser/.ssh/authorized_keys",
+                  "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMA4+6cXuiB2Luqkhvk5iFnCkHQeq/RKGtLWivC4cLOGFzeF6apsPAR6V/OC4qRXj4/vOv+mUTqvsjWO771GvrlwJunfl2jOsRrGehRj6UQmVEWXJIWdRBuUNRgmlzYRXvGHsgv8U7JRSRH89z86uaHPP2iM0rNrLS6MjPqkAcKHAM022YeZ1MvuhOd90UY0awzN2A8b4WVqNdHpL9dqtEGh3ouHYdTWlDPmj8zmPRhYPGepFroP5MPFLxfFnI+Fg/lUtb4TAmODBc8L2SPdPWlsWyQ5jQASDx6sqLiMyU3rPUd4h+uhbdKGCHFJANLg+b2Hvtqi51bXhr0Q1ZGNFL ph@star\n"
+                }
+              ]
+            }
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', 'testvmic')]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "apiVersion": "2016-03-30",
+      "type": "Microsoft.Network/networkInterfaces",
+      "name": "testvmic",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses', 'testvmpublic')]",
+        "[resourceId('Microsoft.Network/virtualNetworks', 'vnet1')]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "testvm-ip-config",
+            "properties": {
+              "subnet": {
+                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', 'vnet1'), '/subnets/', 'default')]"
+              },
+              "privateIPAddress": "192.168.0.5",
+              "privateIPAllocationMethod": "Static",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'testvmpublic')]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2016-03-30",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "testvmpublic",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic",
+        "idleTimeoutInMinutes": 4
+      }
+    },
+    {
+      "apiVersion": "2016-01-01",
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[concat(uniqueString(subscription().subscriptionId, resourceGroup().name), 'teststorage')]",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "Standard_LRS"
+      }
+    }
+  ]
+}
