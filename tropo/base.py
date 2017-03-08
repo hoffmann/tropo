@@ -1,5 +1,33 @@
 import json
 
+def dump(obj):
+    if isinstance(obj, AzureObject):
+        res = {}
+        for k, d in obj._attribute_map.items():
+            if hasattr(obj, k) and (getattr(obj, k) or d.get("required", False)):
+                value = getattr(obj, k)
+                key = d["key"]
+                parts = key.split(".")
+                if len(parts) == 2:
+                    sub, key = parts
+                    if not sub in res:
+                        res[sub] = {}
+                    res[sub][key] = dump(value)
+                else:
+                    res[key] = dump(value)
+    elif isinstance(obj, TemplateFunction):
+        res = "[{}]".format(obj)
+    elif isinstance(obj, dict):
+        res = {key: dump(value) for key, value in obj.items()}
+    elif isinstance(obj, list):
+        res = [dump(value) for value in obj]
+    else:
+        res = obj
+    return res
+
+def dumps(obj):
+    return json.dumps(dump(obj), indent=2)
+
 class AzureObject(object):
     _attribute_map = {}
     def _asdict(self):
@@ -63,4 +91,8 @@ class Resource(AzureObject):
     pass
 
 class SubResource(AzureObject):
+    pass
+
+
+class TemplateFunction(object):
     pass

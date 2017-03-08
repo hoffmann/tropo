@@ -5,7 +5,7 @@
     {
       "apiVersion": "2016-01-01",
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "throbbingbreeze3536",
+      "name": "[uniqueString(subscription().subscriptionId, resourceGroup().name, 'standardstorage')]",
       "location": "[resourceGroup().location]",
       "sku": {
         "name": "Standard_LRS"
