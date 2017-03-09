@@ -1,4 +1,4 @@
-from tropo.base import Resource
+from tropo.base import Resource, SubResource
 
 
 class VirtualNetwork(Resource):
@@ -10,25 +10,26 @@ class VirtualNetwork(Resource):
         description (str): a description of the resource
         tags: ({str}): a dictionary of tags
         dependsOn: ([]): a list of resources
-        addressSpace (addressSpace|str):  Microsoft.Network/virtualNetworks: Address space
-        dhcpOptions (dhcpOptions|str):  Microsoft.Network/virtualNetworks: DHCP options
-        subnets ([subnet]|str):  Microsoft.Network/virtualNetworks: Subnets  
+        addressSpace (AddressSpace):  Microsoft.Network/virtualNetworks: Address space
+        dhcpOptions (DhcpOption):  Microsoft.Network/virtualNetworks: DHCP options
+        subnets ([Subnet]):  Microsoft.Network/virtualNetworks: Subnets  
 
     """
 
-    _type = 'Microsoft.Network/virtualNetworks'
-    _apiVersion = '2016-03-30'
+    type = 'Microsoft.Network/virtualNetworks'
+    apiVersion = '2016-03-30'
+    
     _attribute_map = {
-        '_apiVersion': {'key': 'apiVersion', 'type': 'str'},
-        '_type': {'key': 'type', 'type': 'str'},
+        'apiVersion': {'key': 'apiVersion', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
-        'dependsOn': {'key': 'dependsOn', 'type': '[]'},
-        'addressSpace': {'key': 'properties.addressSpace', 'type': '_'},
-        'dhcpOptions': {'key': 'properties.dhcpOptions', 'type': '_'},
-        'subnets': {'key': 'properties.subnets', 'type': '_'}   
+        'location': {'key': 'location', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': 'str'},
+        'addressSpace': {'key': 'properties.addressSpace', 'type': 'AddressSpace'},
+        'dhcpOptions': {'key': 'properties.dhcpOptions', 'type': 'DhcpOption'},
+        'subnets': {'key': 'properties.subnets', 'type': '[Subnet]'}   
     }
 
     def __init__(self, name, location=None, description=None, tags=None, dependsOn=None, addressSpace=None, dhcpOptions=None, subnets=None):
@@ -43,8 +44,6 @@ class VirtualNetwork(Resource):
         self.dhcpOptions = dhcpOptions
         self.subnets = subnets
         
-
-
 class PublicIPAddress(Resource):
     """Microsoft.Network/publicIPAddresses
 
@@ -54,25 +53,26 @@ class PublicIPAddress(Resource):
         description (str): a description of the resource
         tags: ({str}): a dictionary of tags
         dependsOn: ([]): a list of resources
-        publicIPAllocationMethod (string|str):  Microsoft.Network/publicIPAddresses: Public IP allocation method
-        idleTimeoutInMinutes (_):  Microsoft.Network/publicIPAddresses: Idle timeout in minutes
-        dnsSettings (publicIPAddressDnsSettings|str):  Microsoft.Network/publicIPAddresses: DNS settings  
+        publicIPAllocationMethod (str):  Microsoft.Network/publicIPAddresses: Public IP allocation method
+        idleTimeoutInMinutes (float|str):  
+        dnsSettings (PublicIPAddressDnsSetting):  Microsoft.Network/publicIPAddresses: DNS settings  
 
     """
 
-    _type = 'Microsoft.Network/publicIPAddresses'
-    _apiVersion = '2016-03-30'
+    type = 'Microsoft.Network/publicIPAddresses'
+    apiVersion = '2016-03-30'
+    
     _attribute_map = {
-        '_apiVersion': {'key': 'apiVersion', 'type': 'str'},
-        '_type': {'key': 'type', 'type': 'str'},
+        'apiVersion': {'key': 'apiVersion', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
-        'dependsOn': {'key': 'dependsOn', 'type': '[]'},
-        'publicIPAllocationMethod': {'key': 'properties.publicIPAllocationMethod', 'type': '_'},
-        'idleTimeoutInMinutes': {'key': 'properties.idleTimeoutInMinutes', 'type': '_'},
-        'dnsSettings': {'key': 'properties.dnsSettings', 'type': '_'}   
+        'location': {'key': 'location', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': 'str'},
+        'publicIPAllocationMethod': {'key': 'properties.publicIPAllocationMethod', 'type': 'str'},
+        'idleTimeoutInMinutes': {'key': 'properties.idleTimeoutInMinutes', 'type': 'float|str'},
+        'dnsSettings': {'key': 'properties.dnsSettings', 'type': 'PublicIPAddressDnsSetting'}   
     }
 
     def __init__(self, name, location=None, description=None, tags=None, dependsOn=None, publicIPAllocationMethod=None, idleTimeoutInMinutes=None, dnsSettings=None):
@@ -87,8 +87,6 @@ class PublicIPAddress(Resource):
         self.idleTimeoutInMinutes = idleTimeoutInMinutes
         self.dnsSettings = dnsSettings
         
-
-
 class NetworkSecurityGroup(Resource):
     """Microsoft.Network/networkSecurityGroups
 
@@ -98,21 +96,22 @@ class NetworkSecurityGroup(Resource):
         description (str): a description of the resource
         tags: ({str}): a dictionary of tags
         dependsOn: ([]): a list of resources
-        securityRules ([securityRules]|str):  Microsoft.Network/networkSecurityGroups: Security rules  
+        securityRules ([SecurityRule]):  Microsoft.Network/networkSecurityGroups: Security rules  
 
     """
 
-    _type = 'Microsoft.Network/networkSecurityGroups'
-    _apiVersion = '2016-03-30'
+    type = 'Microsoft.Network/networkSecurityGroups'
+    apiVersion = '2016-03-30'
+    
     _attribute_map = {
-        '_apiVersion': {'key': 'apiVersion', 'type': 'str'},
-        '_type': {'key': 'type', 'type': 'str'},
+        'apiVersion': {'key': 'apiVersion', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
-        'dependsOn': {'key': 'dependsOn', 'type': '[]'},
-        'securityRules': {'key': 'properties.securityRules', 'type': '_'}   
+        'location': {'key': 'location', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': 'str'},
+        'securityRules': {'key': 'properties.securityRules', 'type': '[SecurityRule]'}   
     }
 
     def __init__(self, name, location=None, description=None, tags=None, dependsOn=None, securityRules=None):
@@ -125,21 +124,22 @@ class NetworkSecurityGroup(Resource):
         self.dependsOn = dependsOn
         self.securityRules = securityRules
         
-
-class Subnet(Resource):
+class Subnet(SubResource):
     """
 
     Args:
-        name (string):  
-        addressPrefix (string):  
-        networkSecurityGroup (id):  
-        routeTable (id):   
+        name (str):  
+        addressPrefix (str):  
+        networkSecurityGroup (Id):  
+        routeTable (Id):  
+
     """
+
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'string', 'required': True},
-        'addressPrefix': {'key': 'properties.addressPrefix', 'type': 'string', 'required': True},
-        'networkSecurityGroup': {'key': 'properties.networkSecurityGroup', 'type': 'id'},
-        'routeTable': {'key': 'properties.routeTable', 'type': 'id'}   
+        'name': {'key': 'name', 'type': 'str', 'required': True},
+        'addressPrefix': {'key': 'properties.addressPrefix', 'type': 'str'},
+        'networkSecurityGroup': {'key': 'properties.networkSecurityGroup', 'type': 'Id'},
+        'routeTable': {'key': 'properties.routeTable', 'type': 'Id'}
     }
 
     def __init__(self, name=None, addressPrefix=None, networkSecurityGroup=None, routeTable=None):
@@ -147,40 +147,44 @@ class Subnet(Resource):
         self.addressPrefix = addressPrefix
         self.networkSecurityGroup = networkSecurityGroup
         self.routeTable = routeTable
-
-class Id(Resource):
+        
+class Id(SubResource):
     """
 
     Args:
-        id (string):   
+        id (str):  
+
     """
+
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'string', 'required': True}   
+        'id': {'key': 'id', 'type': 'str', 'required': True}
     }
 
     def __init__(self, id=None):
         self.id = id
-
-class IpConfiguration(Resource):
+        
+class IpConfiguration(SubResource):
     """
 
     Args:
-        name (string):  
-        subnet (id):  
-        privateIPAddress (string):  
-        privateIPAllocationMethod (string|str):  
-        publicIPAddress (id):  
-        loadBalancerBackendAddressPools ([id]):  
-        loadBalancerInboundNatRules ([id]):   
+        name (str):  
+        subnet (Id):  
+        privateIPAddress (str):  
+        privateIPAllocationMethod (str):  
+        publicIPAddress (Id):  
+        loadBalancerBackendAddressPools ([Id]):  
+        loadBalancerInboundNatRules ([Id]):  
+
     """
+
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'string', 'required': True},
-        'subnet': {'key': 'properties.subnet', 'type': 'id', 'required': True},
-        'privateIPAddress': {'key': 'properties.privateIPAddress', 'type': 'string'},
-        'privateIPAllocationMethod': {'key': 'properties.privateIPAllocationMethod', 'type': 'string|str', 'required': True},
-        'publicIPAddress': {'key': 'properties.publicIPAddress', 'type': 'id'},
-        'loadBalancerBackendAddressPools': {'key': 'properties.loadBalancerBackendAddressPools', 'type': '[id]'},
-        'loadBalancerInboundNatRules': {'key': 'properties.loadBalancerInboundNatRules', 'type': '[id]'}   
+        'name': {'key': 'name', 'type': 'str', 'required': True},
+        'subnet': {'key': 'properties.subnet', 'type': 'Id'},
+        'privateIPAddress': {'key': 'properties.privateIPAddress', 'type': 'str'},
+        'privateIPAllocationMethod': {'key': 'properties.privateIPAllocationMethod', 'type': 'str'},
+        'publicIPAddress': {'key': 'properties.publicIPAddress', 'type': 'Id'},
+        'loadBalancerBackendAddressPools': {'key': 'properties.loadBalancerBackendAddressPools', 'type': '[Id]'},
+        'loadBalancerInboundNatRules': {'key': 'properties.loadBalancerInboundNatRules', 'type': '[Id]'}
     }
 
     def __init__(self, name=None, subnet=None, privateIPAddress=None, privateIPAllocationMethod=None, publicIPAddress=None, loadBalancerBackendAddressPools=None, loadBalancerInboundNatRules=None):
@@ -191,49 +195,53 @@ class IpConfiguration(Resource):
         self.publicIPAddress = publicIPAddress
         self.loadBalancerBackendAddressPools = loadBalancerBackendAddressPools
         self.loadBalancerInboundNatRules = loadBalancerInboundNatRules
-
-class NetworkInterfaceDnsSetting(Resource):
+        
+class NetworkInterfaceDnsSetting(SubResource):
     """
 
     Args:
-        dnsServers (str|[string]):  
-        internalDnsNameLabel (string):   
+        dnsServers ([str]):  
+        internalDnsNameLabel (str):  
+
     """
+
     _attribute_map = {
-        'dnsServers': {'key': 'dnsServers', 'type': 'str|[string]'},
-        'internalDnsNameLabel': {'key': 'internalDnsNameLabel', 'type': 'string'}   
+        'dnsServers': {'key': 'dnsServers', 'type': '[str]'},
+        'internalDnsNameLabel': {'key': 'internalDnsNameLabel', 'type': 'str'}
     }
 
     def __init__(self, dnsServers=None, internalDnsNameLabel=None):
         self.dnsServers = dnsServers
         self.internalDnsNameLabel = internalDnsNameLabel
-
-class SecurityRule(Resource):
+        
+class SecurityRule(SubResource):
     """
 
     Args:
-        name (string):  
-        description (string):  
-        protocol (string|str):  
-        sourcePortRange (string):  
-        destinationPortRange (string):  
-        sourceAddressPrefix (string):  
-        destinationAddressPrefix (string):  
-        access (string|str):  
-        priority (number|expr):  
-        direction (string|str):   
+        name (str):  
+        description (str):  
+        protocol (str):  
+        sourcePortRange (str):  
+        destinationPortRange (str):  
+        sourceAddressPrefix (str):  
+        destinationAddressPrefix (str):  
+        access (str):  
+        priority (float|str):  
+        direction (str):  
+
     """
+
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'string', 'required': True},
-        'description': {'key': 'properties.description', 'type': 'string'},
-        'protocol': {'key': 'properties.protocol', 'type': 'string|str', 'required': True},
-        'sourcePortRange': {'key': 'properties.sourcePortRange', 'type': 'string', 'required': True},
-        'destinationPortRange': {'key': 'properties.destinationPortRange', 'type': 'string', 'required': True},
-        'sourceAddressPrefix': {'key': 'properties.sourceAddressPrefix', 'type': 'string', 'required': True},
-        'destinationAddressPrefix': {'key': 'properties.destinationAddressPrefix', 'type': 'string', 'required': True},
-        'access': {'key': 'properties.access', 'type': 'string|str', 'required': True},
-        'priority': {'key': 'properties.priority', 'type': 'number|expr', 'required': True},
-        'direction': {'key': 'properties.direction', 'type': 'string|str', 'required': True}   
+        'name': {'key': 'name', 'type': 'str', 'required': True},
+        'description': {'key': 'properties.description', 'type': 'str'},
+        'protocol': {'key': 'properties.protocol', 'type': 'str'},
+        'sourcePortRange': {'key': 'properties.sourcePortRange', 'type': 'str'},
+        'destinationPortRange': {'key': 'properties.destinationPortRange', 'type': 'str'},
+        'sourceAddressPrefix': {'key': 'properties.sourceAddressPrefix', 'type': 'str'},
+        'destinationAddressPrefix': {'key': 'properties.destinationAddressPrefix', 'type': 'str'},
+        'access': {'key': 'properties.access', 'type': 'str'},
+        'priority': {'key': 'properties.priority', 'type': 'float|str'},
+        'direction': {'key': 'properties.direction', 'type': 'str'}
     }
 
     def __init__(self, name=None, description=None, protocol=None, sourcePortRange=None, destinationPortRange=None, sourceAddressPrefix=None, destinationAddressPrefix=None, access=None, priority=None, direction=None):
@@ -247,17 +255,19 @@ class SecurityRule(Resource):
         self.access = access
         self.priority = priority
         self.direction = direction
-
-class AddressSpace(Resource):
+        
+class AddressSpace(SubResource):
     """
 
     Args:
-        addressPrefixes ([string]):   
+        addressPrefixes ([str]):  
+
     """
+
     _attribute_map = {
-        'addressPrefixes': {'key': 'addressPrefixes', 'type': '[string]', 'required': True}   
+        'addressPrefixes': {'key': 'addressPrefixes', 'type': '[str]', 'required': True}
     }
 
     def __init__(self, addressPrefixes=None):
         self.addressPrefixes = addressPrefixes
-
+        

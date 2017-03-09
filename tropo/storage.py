@@ -9,22 +9,21 @@ class StorageAccount(Resource):
         location (str): The location of the resource
         description (str): a description of the resource
         tags: ({str}): a dictionary of tags
-        dependsOn: ([]): a list of resources 
-
+        dependsOn: ([]): a list of resources
         sku (Sku):  Required. Gets or sets the sku type.
+        kind (str):  Required. Indicates the type of storage account. Possible values include:
+            'Storage', 'BlobStorage'
         customDomain (CustomDomain):  User domain assigned to the storage account. Name is the CNAME source. Only one
             custom domain is supported per storage account at this time. To
             clear the existing custom domain, use an empty string for the custom
             domain name property.
-        kind (str):  Required. Indicates the type of storage account. Possible values include:
-            'Storage', 'BlobStorage'
+        encryption (Encryption):  Provides the encryption settings on the account. If left unspecified the account
+            encryption settings will remain. The default setting is unencrypted.
         accessTier (str):  Required for StandardBlob accounts. The access tier used for billing. Access
             tier cannot be changed more than once every 7 days (168 hours).
             Access tier cannot be set for StandardLRS, StandardGRS,
             StandardRAGRS, or PremiumLRS account types. Possible values include:
-            'Hot', 'Cool'
-        encryption (Encryption):  Provides the encryption settings on the account. If left unspecified the account
-            encryption settings will remain. The default setting is unencrypted.  
+            'Hot', 'Cool'  
 
     """
 
@@ -40,13 +39,13 @@ class StorageAccount(Resource):
         'description': {'key': 'description', 'type': 'str'},
         'tags': {'key': 'tags', 'type': 'str'},
         'sku': {'key': 'sku', 'type': 'Sku', 'required': True},
-        'customDomain': {'key': 'properties.customDomain', 'type': 'CustomDomain'},
         'kind': {'key': 'kind', 'type': 'str', 'required': True},
-        'accessTier': {'key': 'properties.accessTier', 'type': 'str'},
-        'encryption': {'key': 'properties.encryption', 'type': 'Encryption'}   
+        'customDomain': {'key': 'properties.customDomain', 'type': 'CustomDomain'},
+        'encryption': {'key': 'properties.encryption', 'type': 'Encryption'},
+        'accessTier': {'key': 'properties.accessTier', 'type': 'str'}   
     }
 
-    def __init__(self, name, location=None, description=None, tags=None, dependsOn=None, sku=None, customDomain=None, kind=None, accessTier=None, encryption=None):
+    def __init__(self, name, location=None, description=None, tags=None, dependsOn=None, sku=None, kind=None, customDomain=None, encryption=None, accessTier=None):
         self.name = name
         if location is None:
             location = '[resourceGroup().location]'
@@ -55,10 +54,10 @@ class StorageAccount(Resource):
         self.tags = tags
         self.dependsOn = dependsOn
         self.sku = sku
-        self.customDomain = customDomain
         self.kind = kind
-        self.accessTier = accessTier
+        self.customDomain = customDomain
         self.encryption = encryption
+        self.accessTier = accessTier
         
 class Sku(SubResource):
     """The SKU of the storage account.
@@ -93,7 +92,7 @@ class CustomDomain(SubResource):
         'useSubDomain': {'key': 'useSubDomain', 'type': 'bool'}
     }
 
-    def __init__(self, name=None,useSubDomain=None):
+    def __init__(self, name=None, useSubDomain=None):
         self.name = name
         self.useSubDomain = useSubDomain
         
