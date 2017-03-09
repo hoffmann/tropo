@@ -3,12 +3,12 @@ from tropo.base import dump
 
 
 def test_osdisk():
-    od = OsDisk(
+    od = OSDisk(
         name="osdisk",
         image={"uri": "uri"},
         caching="None",
         createOption="FromImage",
-        vhd=Vhd("uri"),
+        vhd=VirtualHardDisk("uri"),
         osType="Linux")
 
     expected = {
@@ -33,7 +33,7 @@ def test_datadisk():
         createOption="Empty",
         caching="None",
         lun=0,
-        vhd=Vhd("uri"))
+        vhd=VirtualHardDisk("uri"))
 
     expected = {
         "name": "datadisk0",
@@ -62,7 +62,7 @@ def test_network_profile():
 
 
 def test_vhd():
-    vhd = Vhd(uri="https://storage.blob.core.windows.net/vhds/osdisk.vhd")
+    vhd = VirtualHardDisk(uri="https://storage.blob.core.windows.net/vhds/osdisk.vhd")
 
     expected = {
         "uri": "https://storage.blob.core.windows.net/vhds/osdisk.vhd"

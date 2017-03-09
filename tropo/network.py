@@ -54,7 +54,7 @@ class PublicIPAddress(Resource):
         tags: ({str}): a dictionary of tags
         dependsOn: ([]): a list of resources
         publicIPAllocationMethod (str):  Microsoft.Network/publicIPAddresses: Public IP allocation method
-        idleTimeoutInMinutes (float|str):  
+        idleTimeoutInMinutes (str|float):  
         dnsSettings (PublicIPAddressDnsSetting):  Microsoft.Network/publicIPAddresses: DNS settings  
 
     """
@@ -71,7 +71,7 @@ class PublicIPAddress(Resource):
         'description': {'key': 'description', 'type': 'str'},
         'tags': {'key': 'tags', 'type': 'str'},
         'publicIPAllocationMethod': {'key': 'properties.publicIPAllocationMethod', 'type': 'str'},
-        'idleTimeoutInMinutes': {'key': 'properties.idleTimeoutInMinutes', 'type': 'float|str'},
+        'idleTimeoutInMinutes': {'key': 'properties.idleTimeoutInMinutes', 'type': 'str|float'},
         'dnsSettings': {'key': 'properties.dnsSettings', 'type': 'PublicIPAddressDnsSetting'}   
     }
 
@@ -123,6 +123,52 @@ class NetworkSecurityGroup(Resource):
         self.tags = tags
         self.dependsOn = dependsOn
         self.securityRules = securityRules
+        
+class NetworkInterface(Resource):
+    """Microsoft.Network/networkInterfaces
+
+    Args:
+        name (str): The name of the resource
+        location (str): The location of the resource
+        description (str): a description of the resource
+        tags: ({str}): a dictionary of tags
+        dependsOn: ([]): a list of resources
+        enableIPForwarding (bool):  Microsoft.Network/networkInterfaces: Enable IP forwarding
+        networkSecurityGroup (Id):  Microsoft.Network/networkInterfaces: Network security group
+        ipConfigurations ([IpConfiguration]):  Microsoft.Network/networkInterfaces: IP configurations
+        dnsSettings (NetworkInterfaceDnsSetting):  Microsoft.Network/networkInterfaces: DNS settings  
+
+    """
+
+    type = 'Microsoft.Network/networkInterfaces'
+    apiVersion = '2016-03-30'
+    
+    _attribute_map = {
+        'apiVersion': {'key': 'apiVersion', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': 'str'},
+        'enableIPForwarding': {'key': 'properties.enableIPForwarding', 'type': 'bool'},
+        'networkSecurityGroup': {'key': 'properties.networkSecurityGroup', 'type': 'Id'},
+        'ipConfigurations': {'key': 'properties.ipConfigurations', 'type': '[IpConfiguration]'},
+        'dnsSettings': {'key': 'properties.dnsSettings', 'type': 'NetworkInterfaceDnsSetting'}   
+    }
+
+    def __init__(self, name, location=None, description=None, tags=None, dependsOn=None, enableIPForwarding=None, networkSecurityGroup=None, ipConfigurations=None, dnsSettings=None):
+        self.name = name
+        if location is None:
+            location = '[resourceGroup().location]'
+        self.location = location
+        self.description = description
+        self.tags = tags
+        self.dependsOn = dependsOn
+        self.enableIPForwarding = enableIPForwarding
+        self.networkSecurityGroup = networkSecurityGroup
+        self.ipConfigurations = ipConfigurations
+        self.dnsSettings = dnsSettings
         
 class Subnet(SubResource):
     """
@@ -226,7 +272,7 @@ class SecurityRule(SubResource):
         sourceAddressPrefix (str):  
         destinationAddressPrefix (str):  
         access (str):  
-        priority (float|str):  
+        priority (str|float):  
         direction (str):  
 
     """
@@ -240,7 +286,7 @@ class SecurityRule(SubResource):
         'sourceAddressPrefix': {'key': 'properties.sourceAddressPrefix', 'type': 'str'},
         'destinationAddressPrefix': {'key': 'properties.destinationAddressPrefix', 'type': 'str'},
         'access': {'key': 'properties.access', 'type': 'str'},
-        'priority': {'key': 'properties.priority', 'type': 'float|str'},
+        'priority': {'key': 'properties.priority', 'type': 'str|float'},
         'direction': {'key': 'properties.direction', 'type': 'str'}
     }
 
