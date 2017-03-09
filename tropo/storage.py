@@ -38,6 +38,7 @@ class StorageAccount(Resource):
         'location': {'key': 'location', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
         'tags': {'key': 'tags', 'type': 'str'},
+        'dependsOn': {'key': 'dependsOn', 'type': '[str]'},
         'sku': {'key': 'sku', 'type': 'Sku', 'required': True},
         'kind': {'key': 'kind', 'type': 'str', 'required': True},
         'customDomain': {'key': 'properties.customDomain', 'type': 'CustomDomain'},

@@ -27,6 +27,7 @@ class VirtualNetwork(Resource):
         'location': {'key': 'location', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
         'tags': {'key': 'tags', 'type': 'str'},
+        'dependsOn': {'key': 'dependsOn', 'type': '[str]'},
         'addressSpace': {'key': 'properties.addressSpace', 'type': 'AddressSpace'},
         'dhcpOptions': {'key': 'properties.dhcpOptions', 'type': 'DhcpOption'},
         'subnets': {'key': 'properties.subnets', 'type': '[Subnet]'}   
@@ -70,6 +71,7 @@ class PublicIPAddress(Resource):
         'location': {'key': 'location', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
         'tags': {'key': 'tags', 'type': 'str'},
+        'dependsOn': {'key': 'dependsOn', 'type': '[str]'},
         'publicIPAllocationMethod': {'key': 'properties.publicIPAllocationMethod', 'type': 'str'},
         'idleTimeoutInMinutes': {'key': 'properties.idleTimeoutInMinutes', 'type': 'str|float'},
         'dnsSettings': {'key': 'properties.dnsSettings', 'type': 'PublicIPAddressDnsSetting'}   
@@ -111,6 +113,7 @@ class NetworkSecurityGroup(Resource):
         'location': {'key': 'location', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
         'tags': {'key': 'tags', 'type': 'str'},
+        'dependsOn': {'key': 'dependsOn', 'type': '[str]'},
         'securityRules': {'key': 'properties.securityRules', 'type': '[SecurityRule]'}   
     }
 
@@ -151,6 +154,7 @@ class NetworkInterface(Resource):
         'location': {'key': 'location', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
         'tags': {'key': 'tags', 'type': 'str'},
+        'dependsOn': {'key': 'dependsOn', 'type': '[str]'},
         'enableIPForwarding': {'key': 'properties.enableIPForwarding', 'type': 'bool'},
         'networkSecurityGroup': {'key': 'properties.networkSecurityGroup', 'type': 'Id'},
         'ipConfigurations': {'key': 'properties.ipConfigurations', 'type': '[IpConfiguration]'},

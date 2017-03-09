@@ -35,6 +35,7 @@ class VirtualMachine(Resource):
         'location': {'key': 'location', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
         'tags': {'key': 'tags', 'type': 'str'},
+        'dependsOn': {'key': 'dependsOn', 'type': '[str]'},
         'plan': {'key': 'plan', 'type': 'Plan'},
         'resources': {'key': 'resources', 'type': '[Nitions/extensionsChild]'},
         'hardwareProfile': {'key': 'properties.hardwareProfile', 'type': 'HardwareProfile'},
