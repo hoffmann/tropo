@@ -6,7 +6,7 @@ from tropo.func import uniqueString, _raw
 storage_type="Standard_LRS"
 name = uniqueString(_raw("subscription().subscriptionId"), _raw("resourceGroup().name"), "standardstorage")
 
-storage = StorageAccount(name=name, sku=Sku(name=storage_type))
+storage = StorageAccount(name=name, sku=Sku(name=storage_type), kind="Storage")
 
 t = Template(resources=[storage])
 

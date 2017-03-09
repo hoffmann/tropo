@@ -57,7 +57,7 @@ class Template(AzureObject):
         self.outputs = outputs
 
     def __str__(self):
-        return json.dumps(self._asdict(), indent=2)
+        return dumps(t)
 
 
 class Resource(AzureObject):

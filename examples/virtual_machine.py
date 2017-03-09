@@ -1,7 +1,7 @@
 from tropo.base import Template, dumps
-from tropo.compute import OsDisk, ImageReference, OsProfile, StorageProfile, LinuxConfiguration, PublicKey, NetworkProfile, Vhd, Ssh, VirtualMachine, HardwareProfile, NetworkInterface
+from tropo.compute import OSDisk, ImageReference, OSProfile, StorageProfile, LinuxConfiguration, SshPublicKey, NetworkProfile, VirtualHardDisk, SshConfiguration, VirtualMachine, HardwareProfile
 from tropo.storage import StorageAccount, Sku
-from tropo.network import VirtualNetwork, PublicIPAddress, IpConfiguration, AddressSpace, Subnet, Id
+from tropo.network import VirtualNetwork, PublicIPAddress, IpConfiguration, AddressSpace, Subnet, Id, NetworkInterface
 from tropo.func import uniqueString, _raw, resourceId, concat
 
 vmname = "testvm"
@@ -27,13 +27,13 @@ network_interface = NetworkInterface(
     ipConfigurations=[
         IpConfiguration(
             name="{}-ip-config".format(vmname),
-            subnet=Id(concat(resourceId(vnet._type, vnet.name), '/subnets/', 'default')),
+            subnet=Id(concat(resourceId(vnet.type, vnet.name), '/subnets/', 'default')),
             privateIPAllocationMethod="Static",
             privateIPAddress='192.168.0.5',
-            publicIPAddress=Id(resourceId(public_ip._type, public_ip.name)))],
+            publicIPAddress=Id(resourceId(public_ip.type, public_ip.name)))],
     enableIPForwarding=False,
-    dependsOn=[resourceId(public_ip._type, public_ip.name),
-               resourceId(vnet._type, vnet.name)]
+    dependsOn=[resourceId(public_ip.type, public_ip.name),
+               resourceId(vnet.type, vnet.name)]
 )
 
 storage = StorageAccount(
@@ -42,13 +42,14 @@ storage = StorageAccount(
             _raw("subscription().subscriptionId"),
             _raw("resourceGroup().name")),
         storagename),
-    sku=Sku(name=storagetype))
+    sku=Sku(name=storagetype),
+    kind="Storage")
 
-osdisk = OsDisk(
+osdisk = OSDisk(
     name="{}-osdisk".format(vmname),
     caching="None",
     createOption="FromImage",
-    vhd=Vhd(
+    vhd=VirtualHardDisk(
         concat(
             "https://",
             storage.name,
@@ -64,18 +65,18 @@ storage_profile = StorageProfile(
         sku="8",
         version="latest"))
 
-os_profile = OsProfile(
+os_profile = OSProfile(
     computerName=vmname,
     adminUsername=admin_user,
     linuxConfiguration=LinuxConfiguration(disablePasswordAuthentication=True,
-                                          ssh=Ssh([PublicKey("/home/{}/.ssh/authorized_keys".format(admin_user), ssh_key)])))
+                                          ssh=SshConfiguration([SshPublicKey("/home/{}/.ssh/authorized_keys".format(admin_user), ssh_key)])))
 
-network_profile = NetworkProfile([Id(resourceId(network_interface._type, network_interface.name))])
+network_profile = NetworkProfile([Id(resourceId(network_interface.type, network_interface.name))])
 
 vm = VirtualMachine(name=vmname,
-                    dependsOn=[resourceId(storage._type, storage.name),
-                               resourceId(network_interface._type, network_interface.name),
-                               resourceId(public_ip._type, public_ip.name),
+                    dependsOn=[resourceId(storage.type, storage.name),
+                               resourceId(network_interface.type, network_interface.name),
+                               resourceId(public_ip.type, public_ip.name),
                                ],
                     hardwareProfile=HardwareProfile(vmSize=vmsize),
                     storageProfile=storage_profile,

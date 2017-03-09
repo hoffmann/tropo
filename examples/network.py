@@ -1,6 +1,6 @@
 from netaddr import IPNetwork
 
-from tropo import Template
+from tropo import Template, dumps
 from tropo.network import VirtualNetwork, AddressSpace
 
 ip = IPNetwork('192.168.0.0/24')
@@ -15,4 +15,4 @@ vnet = VirtualNetwork(name="vnet1",
                       subnets=subnets)
 
 t = Template(resources=[vnet])
-print(t)
+print(dumps(t))
