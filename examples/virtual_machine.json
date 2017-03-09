@@ -28,6 +28,11 @@
       "type": "Microsoft.Compute/virtualMachines",
       "name": "testvm",
       "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', concat(uniqueString(subscription().subscriptionId, resourceGroup().name), 'teststorage'))]",
+        "[resourceId('Microsoft.Network/networkInterfaces', 'testvmic')]",
+        "[resourceId('Microsoft.Network/publicIPAddresses', 'testvmpublic')]"
+      ],
       "properties": {
         "hardwareProfile": {
           "vmSize": "Standard_DS3_v2"
@@ -77,6 +82,10 @@
       "type": "Microsoft.Network/networkInterfaces",
       "name": "testvmic",
       "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses', 'testvmpublic')]",
+        "[resourceId('Microsoft.Network/virtualNetworks', 'vnet1')]"
+      ],
       "properties": {
         "ipConfigurations": [
           {
