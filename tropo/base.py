@@ -1,4 +1,6 @@
 import json
+from .func import resourceId, TemplateFunction
+
 
 def dump(obj):
     if isinstance(obj, AzureObject):
@@ -61,7 +63,8 @@ class Template(AzureObject):
 
 
 class Resource(AzureObject):
-    pass
+    def resourceId(self):
+        return resourceId(self.type, self.name)
 
 class SubResource(AzureObject):
     pass

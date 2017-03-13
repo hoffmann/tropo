@@ -15,6 +15,15 @@ def test_resource():
     assert dump(t) == expected
 
 
+def test_resourceId():
+    class Foo(Resource):
+        def __init__(self, type, name):
+            self.type = type
+            self.name = name
+
+    f = Foo("t1", "n1")
+    assert str(f.resourceId()), "resourceId('t1', 'n1')"
+
 def test_dump():
 
     assert dump("foo") == "foo"
@@ -25,5 +34,4 @@ def test_dump():
     expected = {'$schema': 'https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#', 
                 'contentVersion': '1.0.0.0',
                 'resources': []}
-    print(json.dumps(d, indent=2))
     assert d == expected

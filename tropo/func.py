@@ -1,5 +1,6 @@
-from tropo.base import TemplateFunction
 
+class TemplateFunction(object):
+    pass
 
 def quote(e):
     if isinstance(e, TemplateFunction):
