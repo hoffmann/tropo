@@ -70,5 +70,3 @@ class SubResource(AzureObject):
     pass
 
 
-class TemplateFunction(object):
-    pass
